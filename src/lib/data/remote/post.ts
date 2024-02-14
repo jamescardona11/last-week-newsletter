@@ -5,7 +5,7 @@ import type {
   PartialBlockObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
 
-import { NOTION_BLOG_DB } from '@/lib/data/remote/remote-constants'
+import { NOTION_BLOG_DB as NOTION_POST_DB } from '@/lib/data/remote/remote-constants'
 import { notionClient } from '@/lib/core/notion-core/notion-client'
 import { type NBlogPostRow } from '@/lib/core/notion-core/notion-response-types'
 import { type Post } from '@/lib/types/post.type'
@@ -17,11 +17,11 @@ import {
 
 import { mapNotionBlocks } from '@/lib/core/notion-core/notion-map-blocks'
 
-const notionDatabaseId = NOTION_BLOG_DB
+const notionDatabaseId = NOTION_POST_DB
 
 /// Get all blog posts
 export async function getPostsFromNotion() {
-  console.log('GET /api/blog')
+  console.log('GET /api/posts')
 
   const query = await notionClient.getDatabase(notionDatabaseId, {
     sorts: [
@@ -52,13 +52,7 @@ export async function getPostsFromNotion() {
     return {
       id: row.id,
       slug: slug,
-      title: title,
-      summary: row.summary?.rich_text[0]?.text?.content,
-      cover: row.cover?.files[0]?.file?.url,
-      tags: row.tags?.multi_select.map((tag: { name: any }) => tag.name),
-      serie: row.serie?.select?.name,
-      order: row.order?.number?.format,
-      status: row.status.status.name.toLowerCase(),
+      title: `Last issue ${title}`,
       date: new Date(row.date?.date.start)
     } as Post
   })
@@ -67,8 +61,8 @@ export async function getPostsFromNotion() {
 }
 
 /// Get a blog post by id
-export async function getBlogBlocksById(pageId: string) {
-  console.log(`GET /api/blog/${pageId}`)
+export async function getPostBlocksById(pageId: string) {
+  console.log(`GET /api/post/${pageId}`)
 
   let content: Array<PartialBlockObjectResponse | BlockObjectResponse> = []
   let nextCursor
@@ -93,36 +87,4 @@ export async function getBlogBlocksById(pageId: string) {
   }
 
   return createSuccessResponse(mapNotionBlocks(content))
-}
-
-/// Get a blog post by slug
-export async function getBlogBlocksBySlug(slug: string) {
-  console.log('GET /api/blog/slug')
-
-  const query = await notionClient.getDatabase(notionDatabaseId, {
-    filter: {
-      property: 'slug',
-      formula: {
-        string: {
-          equals: slug
-        }
-      }
-    }
-  })
-
-  if (!query.ok) {
-    console.error(query.error)
-    return query
-  }
-
-  if (query.data.results.length === 0) {
-    console.error('No blog post found with slug: ', slug)
-    return createFailureResponse(
-      `No blog post found with slug: ${slug}`,
-      'NOT_FOUND'
-    )
-  }
-
-  const pageId = query.data.results[0].id
-  return getBlogBlocksById(pageId)
 }

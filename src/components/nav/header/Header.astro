@@ -5,7 +5,6 @@ import Link from '@/components/Link.astro'
 import MobileNav from '@/components/nav/mobile/MobileNav.astro'
 import ThemeSwitcher from './ThemeSwitcher.astro'
 import { navItemsList } from '../nav-items'
-import { SubMenuItem } from './SubMenuItem'
 import MenuItem from './MenuItem.astro'
 
 import { siteMetadata } from '@/site-metadata'
@@ -31,10 +30,6 @@ import { siteMetadata } from '@/site-metadata'
           navItemsList
             .filter(e => e.hideNavigation == null || !e.hideNavigation)
             .map(navItem => {
-              if (navItem.subMenu != null) {
-                return <SubMenuItem client:load navItem={navItem} />
-              }
-
               return <MenuItem navItem={navItem} />
             })
         }

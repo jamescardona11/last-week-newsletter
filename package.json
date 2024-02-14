@@ -1,5 +1,5 @@
 {
-  "name": "blogfolio-astro",
+  "name": "flutter-newsletter",
   "type": "module",
   "version": "0.0.1",
   "scripts": {
@@ -7,11 +7,9 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro",
-    "postinstall": "prisma generate"
+    "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/mdx": "^2.1.1",
     "@astrojs/react": "^3.0.10",
     "@astrojs/rss": "^4.0.5",
     "@astrojs/sitemap": "^3.0.5",
@@ -19,7 +17,6 @@
     "@astrojs/vercel": "^7.3.1",
     "@notionhq/client": "^2.2.14",
     "@octokit/graphql": "^7.0.2",
-    "@prisma/client": "5.9.1",
     "@radix-ui/react-icons": "^1.3.0",
     "@radix-ui/react-navigation-menu": "^1.1.4",
     "@radix-ui/react-slot": "^1.0.2",
@@ -41,7 +38,6 @@
     "@tailwindcss/typography": "^0.5.10",
     "prettier": "^3.2.5",
     "prettier-plugin-astro": "^0.13.0",
-    "prisma": "^5.9.1",
     "tailwindcss": "^3.4.1"
   }
 }
