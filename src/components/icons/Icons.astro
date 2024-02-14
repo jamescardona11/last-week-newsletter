@@ -6,21 +6,13 @@ import Github from './source/Github.astro'
 import Youtube from './source/Youtube.astro'
 import Linkedin from './source/Linkedin.astro'
 import Twitter from './source/Twitter.astro'
-
 import LinkIcon from './source/LinkIcon.astro'
 import FileIcon from './source/FileIcon.astro'
-import StartIcon from './source/StartIcon.astro'
-import ClockIcon from './source/ClockIcon.astro'
-import ContributionsIcon from './source/ContributionsIcon.astro'
-import LikeIcon from './source/LikeIcon.astro'
-import ViewsIcon from './source/ViewsIcon.astro'
 import ChevronDown from './source/ChevronDown.astro'
 import ChevronUp from './source/ChevronUp.astro'
 import ChevronLeft from './source/ChevronLeft.astro'
 import ChevronRight from './source/ChevronRight.astro'
 
-import ProfessionalIcon from './source/ProfessionalIcon.astro'
-import SideProjectIcon from './source/SideProjectIcon.astro'
 import Arrow from './source/Arrow.astro'
 
 const components = {
@@ -31,18 +23,11 @@ const components = {
   mail: Mail,
   link: LinkIcon,
   file: FileIcon,
-  start: StartIcon,
-  clock: ClockIcon,
-  contributions: ContributionsIcon,
-  likes: LikeIcon,
-  views: ViewsIcon,
   chevronDown: ChevronDown,
   chevronUp: ChevronUp,
   chevronLeft: ChevronLeft,
   chevronRight: ChevronRight,
-  arrow: Arrow,
-  profesional: ProfessionalIcon,
-  sideProjects: SideProjectIcon
+  arrow: Arrow
 }
 
 export type IconKey = keyof typeof components
@@ -66,6 +51,8 @@ className =
   !href && className
     ? className
     : 'text-sm text-gray-500 transition hover:text-gray-600'
+
+console.log(className)
 ---
 
 {
