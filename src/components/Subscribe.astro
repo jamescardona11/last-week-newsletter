@@ -1,0 +1,71 @@
+---
+import Button from './Button.astro'
+import Link from './Link.astro'
+
+const { class: className } = Astro.props
+
+const subscribe = {
+  title: 'Subscribe to Newsletter',
+  text: 'One update per week. All the latest posts directly in your inbox.',
+  formUrl: '#'
+}
+---
+
+{
+  subscribe?.formUrl && (
+    <section
+      class:list={[
+        'px-4 py-6 flex flex-col items-center border border-main text-center sm:px-6 sm:py-8',
+        className
+      ]}
+    >
+      {subscribe.title && (
+        <h2
+          class:list={[
+            'w-full max-w-xl text-2xl leading-tight font-serif font-medium sm:text-4xl mb-4'
+          ]}
+        >
+          {subscribe.title}
+        </h2>
+      )}
+
+      <p class='w-full max-w-xl mb-8 text-sm leading-normal'>
+        {subscribe.text}
+      </p>
+
+      <form
+        action={subscribe.formUrl}
+        method='post'
+        id='subscribe-form'
+        name='subscribe-form'
+        class='w-full max-w-xl flex flex-col gap-3.5 sm:flex-row'
+        target='_blank'
+      >
+        <label for='email' class='sr-only'>
+          Email Address
+        </label>
+        <input
+          type='email'
+          name='email'
+          id='email'
+          class='w-full h-9 px-5 py-2 text-sm text-main bg-transparent border border-main rounded-full placeholder:text-main/60 focus:outline-none'
+          required=''
+          value=''
+          placeholder='Your email'
+        />
+        <Button type='submit' name='subscribe' class='w-full h-9 sm:w-auto'>
+          Subscribe
+        </Button>
+      </form>
+      <p class='mt-8 w-full max-w-xl mb-4 text-sm leading-normal'>or</p>
+      <p class='mt-2 w-full max-w-xl text-sm leading-normal'>
+        <Link
+          href='https://www.linkedin.com/newsletters/flutter-last-week-7149938382482092032/'
+          class='text-main underline'
+        >
+          Subscribe on LinkedIn
+        </Link>
+      </p>
+    </section>
+  )
+}

@@ -1,6 +1,7 @@
 ---
 import { siteMetadata } from '@/site-metadata'
 import { navItemsList } from '../nav-items'
+import Link from '@/components/Link.astro'
 ---
 
 <footer
@@ -10,7 +11,14 @@ import { navItemsList } from '../nav-items'
     &copy; {siteMetadata.name}
     {'  '}
     <span class='inline-block'>&nbsp;🚀&nbsp;</span>
-    <div class='ml-4'>Subscribe on Linkedin</div>
+    <div class='ml-4'>
+      <Link
+        href='https://www.linkedin.com/newsletters/flutter-last-week-7149938382482092032/'
+        class='text-main'
+      >
+        Subscribe on LinkedIn
+      </Link>
+    </div>
   </div>
 
   <nav

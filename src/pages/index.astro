@@ -8,6 +8,7 @@ import Icons, { type IconKey } from '@/components/icons/Icons.astro'
 
 import { getPostsData } from '@/lib/data/posts-provider'
 import PostPreview from '@/components/PostPreview.astro'
+import Subscribe from '@/components/Subscribe.astro'
 
 const data = await getPostsData(20)
 ---
@@ -58,6 +59,8 @@ const data = await getPostsData(20)
           }
         </ul>
       </section>
+
+      <Subscribe class='mt-16 sm:mt-24' />
     </div>
   </section>
 </PageLayout>
