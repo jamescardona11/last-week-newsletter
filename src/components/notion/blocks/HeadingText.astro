@@ -1,6 +1,5 @@
 ---
 import Link from '@components/Link.astro'
-import Icons from '@components/icons/Icons.astro'
 
 interface Props {
   hashLink: string
@@ -12,5 +11,4 @@ const { hashLink, text } = Astro.props
 
 <div class='flex items-center'>
   <Link href={`#${hashLink}`}>{text}</Link>
-  <Icons kind='link' />
 </div>

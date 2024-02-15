@@ -23,7 +23,7 @@ const { page } = Astro.props
 const { data: posts } = page
 ---
 
-<PageLayout metaTitle='Blog'>
+<PageLayout metaTitle='Posts'>
   <PageTitle title='Posts' />
 
   {page.total == 0 && <p>No posts published.</p>}
