@@ -159,8 +159,9 @@ export const mapNotionBlocks = (
           return [...prev, factory.break()]
         }
         const content = transformNotionRichText(richText)
+        const q = content.map(c => c.text).join('')
 
-        return [...prev, factory.quote(content[0].text)]
+        return [...prev, factory.quote(q)]
       }
 
       case 'callout': {
@@ -314,6 +315,7 @@ const transformNotionMedia = (
 const transformNotionRichText = (
   richText: RichTextItemResponse[]
 ): TextBlock[] => {
+  console.log(richText)
   return richText.map(t => {
     const styles = matchStyle(t.annotations as StyleAnnotations)
     const url =

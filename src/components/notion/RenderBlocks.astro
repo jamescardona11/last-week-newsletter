@@ -54,6 +54,7 @@ const { blocks } = Astro.props
     }
 
     if (block.type === 'quote') {
+      console.log(block)
       return <Quote quote={block.text} />
     }
 
