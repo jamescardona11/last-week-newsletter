@@ -7,13 +7,9 @@ import Youtube from './source/Youtube.astro'
 import Linkedin from './source/Linkedin.astro'
 import Twitter from './source/Twitter.astro'
 import LinkIcon from './source/LinkIcon.astro'
-import FileIcon from './source/FileIcon.astro'
-import ChevronDown from './source/ChevronDown.astro'
-import ChevronUp from './source/ChevronUp.astro'
+
 import ChevronLeft from './source/ChevronLeft.astro'
 import ChevronRight from './source/ChevronRight.astro'
-
-import Arrow from './source/Arrow.astro'
 
 const components = {
   github: Github,
@@ -22,12 +18,8 @@ const components = {
   x: Twitter,
   mail: Mail,
   link: LinkIcon,
-  file: FileIcon,
-  chevronDown: ChevronDown,
-  chevronUp: ChevronUp,
   chevronLeft: ChevronLeft,
-  chevronRight: ChevronRight,
-  arrow: Arrow
+  chevronRight: ChevronRight
 }
 
 export type IconKey = keyof typeof components
