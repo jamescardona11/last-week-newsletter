@@ -1,5 +1,4 @@
 ---
-import Logo from '@/components/Logo.astro'
 import Link from '@/components/Link.astro'
 
 import MobileNav from '@/components/nav/mobile/MobileNav.astro'
@@ -18,8 +17,9 @@ import { siteMetadata } from '@/site-metadata'
         aria-label={siteMetadata.name}
         class='flex items-center space-x-2'
       >
-        <Logo />
-        <span class='hidden font-bold leading-5 text-md sm:inline-block'>
+        <span
+          class='hidden font-bold leading-5 text-3xl font-heading sm:inline-block'
+        >
           {siteMetadata.name}
         </span>
       </Link>

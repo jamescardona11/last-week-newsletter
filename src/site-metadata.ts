@@ -9,7 +9,7 @@ const siteMetadata = {
   linkedin: 'jamescardona11',
   twitter: 'jamescardona11_',
   youtube: 'https://youtube.com',
-  name: 'Last week - Flutter'
+  name: 'Last week - Newsletter'
 }
 
 export { siteMetadata }

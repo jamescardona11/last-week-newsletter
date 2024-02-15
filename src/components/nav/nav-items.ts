@@ -12,8 +12,8 @@ const navItemsList: NavItemProps[] = [
   },
 
   {
-    href: '/about',
-    title: 'About'
+    href: '/contact',
+    title: 'Contact'
   }
 ]
 
