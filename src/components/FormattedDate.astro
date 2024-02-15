@@ -4,16 +4,16 @@ interface Props {
 }
 
 const { date } = Astro.props
+
+console.log()
+const dateFormat = new Intl.DateTimeFormat('en-us', {
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric'
+})
+const df = dateFormat.format(new Date(date))
 ---
 
 <span class='min-w-[120px] text-zinc-400 dark:text-zinc-400'>
-  <time datetime={date.toISOString()}>
-    {
-      date.toLocaleDateString('en-us', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-      })
-    }
-  </time>
+  <time datetime={date.toISOString()}> {df} </time>
 </span>

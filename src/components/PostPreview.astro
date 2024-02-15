@@ -7,9 +7,13 @@ interface Props {
 }
 
 const { post } = Astro.props
+
+const date = post.date
+let day = date.getDate()
+date.setDate(day + 1)
 ---
 
-<FormattedDate date={post.date} />
+<FormattedDate date={date} />
 <div>
   <a class='underline' data-astro-prefetch href={`/posts/${post.slug}/`}>
     {post.title}

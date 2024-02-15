@@ -1,38 +1,35 @@
 ---
-import SocialIcon from '@/components/icons/Icons.astro'
 import { siteMetadata } from '@/site-metadata'
-
-import Link from '@components/Link.astro'
+import { navItemsList } from '../nav-items'
 ---
 
-<footer>
-  <div class='mt-16 flex flex-col items-center'>
-    <div class='mb-3 flex space-x-4'>
-      <SocialIcon kind='mail' href={`mailto:${siteMetadata.email}`} size={6} />
-      <SocialIcon kind='github' href={siteMetadata.github} size={6} />
-      <SocialIcon kind='youtube' href={siteMetadata.youtube} size={6} />
-      <SocialIcon kind='linkedin' href={siteMetadata.linkedin} size={6} />
-      <SocialIcon kind='x' href={siteMetadata.twitter} size={6} />
-    </div>
-    <div class='mb-2 flex space-x-2 text-sm text-gray-500 dark:text-gray-400'>
-      <Link href='/about'>{siteMetadata.name}</Link>
-      <div>{` • `}</div>
-      <div>{`© ${new Date().getFullYear()}`}</div>
-      <div>{` • `}</div>
-      <Link href='/'>{siteMetadata.title}</Link>
-    </div>
-    <div class='mb-8 text-sm text-gray-500 dark:text-gray-400'>
-      <Link href={siteMetadata.siteRepo}>
-        {siteMetadata.title}
-        {` is open source. `}
-        {` View `}
-        <span class='underline'>the source</span>
-        {` code on `}
-        <span class='underline'>GitHub</span>
-        {` and `}
-        <span class='underline'>give it a star</span>
-        {` if you like it.`}
-      </Link>
-    </div>
+<footer
+  class='container mx-auto max-w-[62rem] flex flex-col items-center justify-center gap-y-2 pb-4 pt-20 text-center align-top font-semibold text-gray-600 dark:text-gray-400 sm:flex-row sm:justify-between sm:text-xs'
+>
+  <div class='flex me-0 sm:me-4'>
+    &copy; {siteMetadata.name}
+    {'  '}
+    <span class='inline-block'>&nbsp;🚀&nbsp;</span>
+    <div class='ml-4'>Subscribe on Linkedin</div>
   </div>
+
+  <nav
+    aria-label='More on this site'
+    class='flex gap-x-2 sm:gap-x-0 sm:divide-x sm:divide-gray-500'
+  >
+    {
+      navItemsList
+        .filter(e => e.hideNavigation == null || !e.hideNavigation)
+        .map(navItem => {
+          return (
+            <a
+              class='px-4 py-2 sm:py-0 sm:hover:text-textColor sm:hover:underline'
+              href={navItem.href}
+            >
+              {navItem.title}
+            </a>
+          )
+        })
+    }
+  </nav>
 </footer>

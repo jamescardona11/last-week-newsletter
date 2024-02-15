@@ -4,7 +4,6 @@
 
 /* Additional styles */
 @import 'utility-patterns.css';
-@import 'pre-code.css';
 
 @layer base {
   @font-face {
@@ -90,7 +89,7 @@
   }
 
   .dark {
-    --background: 240 10% 3.9%;
+    --background: 210deg 6% 12%;
     --foreground: 0 0% 98%;
 
     --card: 240 10% 3.9%;
