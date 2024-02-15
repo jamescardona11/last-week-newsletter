@@ -2,21 +2,21 @@ name: Weekly Commit
 
 on:
   schedule:
-    - cron: "0 8 * * 1" # Esto se ejecuta cada lunes a las 8 AM UTC
+    - cron: '0 20 * * 1' # Esto se ejecuta cada lunes a las 8 AM UTC
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
-      
-    - name: Create commit
-      run: |
-        echo "$(date)" >> commit.txt
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add commit.txt
-        git commit -m "Automated commit - $(date)"
-        git push
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Create commit
+        run: |
+          echo "$(date)" >> commit.txt
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add commit.txt
+          git commit -m "Automated commit - $(date)"
+          git push
