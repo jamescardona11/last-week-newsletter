@@ -11,12 +11,10 @@ export async function GET(context) {
     title,
     description,
     site: context.site,
-    items: posts.map(({ slug, cover, title, summary, date, tags }) => ({
+    items: posts.map(({ slug, title, date, }) => ({
       title,
-      categories: tags.map(tag => `/blog/tag/${tag?.toLowerCase()}`),
       pubDate: date,
-      description: summary,
-      link: `/blog/${slug}/`
+      link: `/posts/${slug}/`
     }))
   })
 }

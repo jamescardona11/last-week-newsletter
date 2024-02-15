@@ -6,16 +6,13 @@ import PageLayout from '@/layouts/PageLayout.astro'
 
 import Pagination from '@/components/Pagination.astro'
 
-import SwapViewButtons from '@components/SwapViewButtons.astro'
-
-import PostsGridView from '@/components/for-pages/blog/PostsGridView.astro'
-import PostsListView from '@/components/for-pages/blog/PostsListView.astro'
+import PostsListView from '@/components/PostsListView.astro'
 import { getPostsData } from '@/lib/data/posts-provider'
 
 // @ts-ignore
 export async function getStaticPaths({ paginate }) {
   const posts = await getPostsData()
-  return paginate(posts, { pageSize: 10 })
+  return paginate(posts, { pageSize: 30 })
 }
 
 interface Props {
@@ -27,19 +24,9 @@ const { data: posts } = page
 ---
 
 <PageLayout metaTitle='Blog'>
-  <div class='flex justify-between'>
-    <PageTitle
-      title='Blog'
-      subtitle='A blog built using Contentlayer. Posts are written in MDX.'
-    />
-    <SwapViewButtons />
-  </div>
-
-  <hr class='my-8 border-muted' />
+  <PageTitle title='Posts' />
 
   {page.total == 0 && <p>No posts published.</p>}
-  <!-- GRID VIEW -->
-  <PostsGridView posts={posts} />
 
   <!-- LIST VIEW -->
   <PostsListView posts={posts} />

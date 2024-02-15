@@ -1,10 +1,7 @@
 ---
 import type { Post } from '@/lib/types/post.type'
 
-import Link from '@components/Link.astro'
-import FormattedDate from './FormattedDate.astro'
-import Icons from '@/components/icons/Icons.astro'
-import TextShadow from '@/components/TextShadow.astro'
+import PostPreview from './PostPreview.astro'
 
 interface Props {
   posts: Post[]
@@ -15,32 +12,12 @@ const { posts } = Astro.props
 
 <div class='block'>
   {
-    // destructuring data from the collection
-    // review `content/config.ts destructure the right data
-    posts.map(function ({ slug, title, date }) {
-      const href = `/blog/${slug}`
-
-      return (
-        <article class='py-5 border-b border-slate-100 dark:border-slate-800 '>
-          <div class='flex items-start'>
-            <div class='w-full'>
-              <div class='text-xs text-slate-500 uppercase mb-1'>
-                <FormattedDate date={date} />
-              </div>
-              <TextShadow href={href}>{title}</TextShadow>
-
-              <div class='flex justify-between'>
-                <Link
-                  class='hidden lg:flex shrink-0 text-foreground items-center justify-center w-12 group'
-                  href={href}
-                >
-                  <Icons kind='arrow' />
-                </Link>
-              </div>
-            </div>
-          </div>
-        </article>
-      )
-    })
+    posts.map(p => (
+      <article class='py-5'>
+        <div class='flex items-start'>
+          <PostPreview post={p} />
+        </div>
+      </article>
+    ))
   }
 </div>
