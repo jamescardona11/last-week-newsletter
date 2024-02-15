@@ -1,8 +1,8 @@
 export type NBlogPostRow = {
   id?: string
-  title: {
+  Name: {
     id: string
     title: Array<{ text: { content: string } }>
   }
-  date: { date: { start: string } }
+  Date: { date: { start: string } }
 }

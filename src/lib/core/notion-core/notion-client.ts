@@ -21,13 +21,14 @@ export class NotionClient {
 
   async getDatabase(
     databaseId: string,
-    { filter, sorts }: { filter?: any; sorts?: any } = {}
+    { filter, sorts, size }: { filter?: any; sorts?: any; size?: number } = {}
   ) {
     try {
       const response = await this.client.databases.query({
         database_id: databaseId,
         filter,
-        sorts
+        sorts,
+        page_size: size
       })
 
       return createSuccessResponse({

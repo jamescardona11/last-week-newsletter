@@ -5,7 +5,7 @@ import type { Post } from '@/lib/types/post.type'
 import PageLayout from '@/layouts/PageLayout.astro'
 import Link from '@/components/Link.astro'
 
-import { getPostsData } from '@/lib/data/blog-provider'
+import { getPostsData } from '@/lib/data/posts-provider'
 import PostsListView from '@/components/for-pages/blog/PostsListView.astro'
 import BaseCard from '@/components/BaseCard.astro'
 import { filterSeriePosts, sortSeriePosts } from '@/lib/data/local/mdx-posts'
@@ -105,3 +105,4 @@ const slug = slugger(serie)
     </div>
   </div>
 </PageLayout>
+@/lib/data/posts-provider

@@ -20,13 +20,14 @@ import { mapNotionBlocks } from '@/lib/core/notion-core/notion-map-blocks'
 const notionDatabaseId = NOTION_POST_DB
 
 /// Get all blog posts
-export async function getPostsFromNotion() {
+export async function getPostsFromNotion(limit?: number) {
   console.log('GET /api/posts')
 
   const query = await notionClient.getDatabase(notionDatabaseId, {
+    size: limit ?? 100,
     sorts: [
       {
-        property: 'date',
+        property: 'Date',
         direction: 'descending'
       }
     ]
@@ -46,14 +47,14 @@ export async function getPostsFromNotion() {
   })
 
   const blogPost = rows.map(row => {
-    const title = row.title.title[0].text.content
+    const title = row.Name.title[0].text.content
     const slug = slugger(title)
 
     return {
       id: row.id,
       slug: slug,
       title: `Last issue ${title}`,
-      date: new Date(row.date?.date.start)
+      date: new Date(row.Date?.date.start)
     } as Post
   })
 

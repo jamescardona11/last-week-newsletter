@@ -17,7 +17,7 @@ import {
   getBlogContent,
   getPostsData,
   getSerieBySlug
-} from '@/lib/data/blog-provider'
+} from '@/lib/data/posts-provider'
 import Views from '@/components/for-pages/blog/posts/views/views.tsx'
 import Tags from '@/components/for-pages/blog/Tags.astro'
 
@@ -111,7 +111,7 @@ const postsSerie = await getSerieBySlug(slug)
   <div class='flex flex-col items-center justify-center pb-6'>
     <Link href='/blog' class='flex items-center py-3 lg:py-6'>
       <Icons kind='chevronLeft' class='w-4 h-4 mr-1' />
-       Back to blog
+      Back to blog
     </Link>
   </div>
 
@@ -197,3 +197,4 @@ const postsSerie = await getSerieBySlug(slug)
     bottomSerie?.classList.add('hidden')
   }
 </script>
+@/lib/data/posts-provider

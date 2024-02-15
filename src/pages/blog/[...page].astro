@@ -10,7 +10,7 @@ import SwapViewButtons from '@components/SwapViewButtons.astro'
 
 import PostsGridView from '@/components/for-pages/blog/PostsGridView.astro'
 import PostsListView from '@/components/for-pages/blog/PostsListView.astro'
-import { getPostsData } from '@/lib/data/blog-provider'
+import { getPostsData } from '@/lib/data/posts-provider'
 
 // @ts-ignore
 export async function getStaticPaths({ paginate }) {
@@ -46,3 +46,4 @@ const { data: posts } = page
 
   {(page.url.next || page.url.prev) && <Pagination page={page} />}
 </PageLayout>
+@/lib/data/posts-provider

@@ -7,7 +7,6 @@ const { date } = Astro.props
 ---
 
 <span class='text-zinc-400 dark:text-zinc-400'>
-  Published on
   <time datetime={date.toISOString()}>
     {
       date.toLocaleDateString('en-us', {

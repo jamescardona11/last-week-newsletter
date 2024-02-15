@@ -1,0 +1,17 @@
+---
+import FormattedDate from './FormattedDate.astro'
+import type { Post } from '@/lib/types/post.type'
+
+interface Props {
+  post: Post
+}
+
+const { post } = Astro.props
+---
+
+<FormattedDate date={post.date} />
+<div>
+  <a class='underline' data-astro-prefetch href={`/posts/${post.slug}/`}>
+    {post.title}
+  </a>
+</div>
