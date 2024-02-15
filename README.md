@@ -2,8 +2,7 @@
 
 # Flutter last week - Newsletter
 
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/git/external?repository-url=https://github.com/jamescardona11/blogfolio-astro)
+Base in this REPO: [Blogfolio](https://github.com/jamescardona11/blogfolio-astro)
     
 Discover the latest in Flutter and Dart week by week—awe-inspiring articles, cutting-edge tutorials, game-changing packages, and mind-blowing videos.
 
