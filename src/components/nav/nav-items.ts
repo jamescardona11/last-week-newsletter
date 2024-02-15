@@ -7,35 +7,13 @@ const navItemsList: NavItemProps[] = [
     hideNavigation: true
   },
   {
-    href: '/blog',
-    title: 'Blog'
+    href: '/posts',
+    title: 'Posts'
   },
-  {
-    href: '/projects',
-    title: 'Projects'
-  },
+
   {
     href: '/about',
-    title: 'About me'
-  },
-
-  {
-    href: '/more',
-    title: 'More',
-
-    subMenu: [
-      {
-        href: '/resume',
-        title: 'Resume'
-      },
-
-      {
-        href: '/uses',
-        title: 'Uses'
-      },
-      { href: '/rss.xml', title: 'RSS' },
-      
-    ]
+    title: 'About'
   }
 ]
 

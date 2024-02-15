@@ -6,7 +6,7 @@ interface Props {
 const { date } = Astro.props
 ---
 
-<span class='text-zinc-400 dark:text-zinc-400'>
+<span class='min-w-[120px] text-zinc-400 dark:text-zinc-400'>
   <time datetime={date.toISOString()}>
     {
       date.toLocaleDateString('en-us', {

@@ -1,21 +1,16 @@
 // Detect system preference change
-window
-  .matchMedia('(prefers-color-scheme: dark)')
-  .addEventListener('change', event => {
-    setTheme(event.matches ? 'dark' : 'light')
-  })
+const panelElements =
+  window
+    .matchMedia('(prefers-color-scheme: dark)')
+    .addEventListener('change', event => {
+      setTheme(event.matches ? 'dark' : 'light')
+    })
 
 // Set theme
 function setTheme(newTheme) {
   localStorage.setItem('theme', newTheme)
   document.documentElement.classList.remove('dark', 'light')
   document.documentElement.classList.add(newTheme)
-  document
-    .querySelector('button[aria-label="Toggle Dark Mode"] .sun')
-    .classList.toggle('hidden', newTheme !== 'dark')
-  document
-    .querySelector('button[aria-label="Toggle Dark Mode"] .moon')
-    .classList.toggle('hidden', newTheme !== 'light')
 }
 
 // Toggle theme
