@@ -1,10 +1,9 @@
 // Detect system preference change
-const panelElements =
-  window
-    .matchMedia('(prefers-color-scheme: dark)')
-    .addEventListener('change', event => {
-      setTheme(event.matches ? 'dark' : 'light')
-    })
+window
+  .matchMedia('(prefers-color-scheme: dark)')
+  .addEventListener('change', event => {
+    setTheme(event.matches ? 'dark' : 'light')
+  })
 
 // Set theme
 function setTheme(newTheme) {
