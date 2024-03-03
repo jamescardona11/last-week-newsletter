@@ -2,7 +2,6 @@
 import Link from '@/components/Link.astro'
 
 import MobileNav from '@/components/nav/mobile/MobileNav.astro'
-import ThemeSwitcher from './ThemeSwitcher.astro'
 import { navItemsList } from '../nav-items'
 import MenuItem from './MenuItem.astro'
 
@@ -33,8 +32,6 @@ import { siteMetadata } from '@/site-metadata'
               return <MenuItem navItem={navItem} />
             })
         }
-
-        <ThemeSwitcher />
       </nav>
     </div>
     <MobileNav />
