@@ -9,6 +9,6 @@ interface Props {
 const { hashLink, text } = Astro.props
 ---
 
-<div class='flex items-center'>
+<div class='flex items-center text-muted-foreground'>
   <Link href={`#${hashLink}`}>{text}</Link>
 </div>
