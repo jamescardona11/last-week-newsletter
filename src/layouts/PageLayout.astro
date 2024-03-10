@@ -4,11 +4,21 @@ import RootLayout from '@/layouts/root/RootLayout.astro'
 interface Props {
   metaTitle?: string
   metaDescription?: string
+  showSubscribe?: boolean
 }
 
-const { metaTitle: title, metaDescription: description } = Astro.props
+const {
+  metaTitle: title,
+  metaDescription: description,
+  showSubscribe
+} = Astro.props
 ---
 
-<RootLayout metaTitle={title} metaDescription={description} maxWidth={true}>
+<RootLayout
+  metaTitle={title}
+  metaDescription={description}
+  maxWidth={true}
+  showSubscribe={showSubscribe}
+>
   <slot />
 </RootLayout>

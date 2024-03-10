@@ -1,0 +1,10 @@
+---
+export const prerender = true
+
+import PageLayout from '@/layouts/PageLayout.astro'
+import Form from '@/components/form.tsx'
+---
+
+<PageLayout metaTitle='Create page' showSubscribe={false}>
+  <div><Form client:load /></div>
+</PageLayout>

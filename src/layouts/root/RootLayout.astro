@@ -8,9 +8,15 @@ interface Props {
   metaTitle?: string
   metaDescription?: string
   maxWidth?: boolean
+  showSubscribe?: boolean
 }
 
-const { metaTitle: title, metaDescription: description, maxWidth } = Astro.props
+const {
+  metaTitle: title,
+  metaDescription: description,
+  maxWidth,
+  showSubscribe = true
+} = Astro.props
 ---
 
 <html lang='en' class='scroll-smooth'>
@@ -32,7 +38,7 @@ const { metaTitle: title, metaDescription: description, maxWidth } = Astro.props
     <div
       class='max-w-[62rem] container flex flex-col py-16 mx-auto mb-auto md:py-10'
     >
-      <Subscribe class='mt-16 sm:mt-24' />
+      {showSubscribe && <Subscribe class='mt-16 sm:mt-24' />}
     </div>
     <Footer />
   </body>
