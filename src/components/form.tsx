@@ -2,7 +2,10 @@ import type { GPTResponse } from '@/lib/types/gpt-reponse.type'
 import { type FormEvent, useState } from 'react'
 
 export default function Form() {
-  const [responseMessage, setResponseMessage] = useState<GPTResponse[]>([])
+  const [dataLink, setDataLink] = useState<GPTResponse[]>([])
+  const [formData, setFormData] = useState({
+    textAreaValue: '' // State to control the value of the textarea
+  })
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -14,12 +17,38 @@ export default function Form() {
     })
     const data = await response.json()
 
-    if (data.message) {
-      console.log(data.message)
-      for (const message of data.message) {
-        setResponseMessage([...responseMessage, message as GPTResponse])
+    if (data.links) {
+      console.log(data.links)
+      for (const link of data.links) {
+        setDataLink([...dataLink, link as GPTResponse])
       }
     }
+  }
+
+  const handleTextAreaChange = event => {
+    setFormData({
+      ...formData,
+      textAreaValue: event.target.value // Update the value of the textarea in the state
+    })
+  }
+
+  async function sendToNotion() {
+    const response = await fetch('/api/notion', {
+      method: 'POST',
+      body: JSON.stringify({
+        links: dataLink
+      })
+    })
+
+    const data = await response.json()
+    console.log(data)
+  }
+
+  const reset = () => {
+    setDataLink([])
+    setFormData({
+      textAreaValue: ''
+    })
   }
 
   return (
@@ -27,11 +56,11 @@ export default function Form() {
       <form onSubmit={submit} className='flex flex-col'>
         <label htmlFor='url'>
           <textarea
-            // type='text'
             id='url'
             name='url'
-            required
             className='flex h-20 w-full '
+            value={formData.textAreaValue} // Bind the value of the textarea to the state
+            onChange={handleTextAreaChange} // Handle changes in the textarea
           />
         </label>
 
@@ -41,20 +70,51 @@ export default function Form() {
           <button className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'>
             Summary
           </button>
+          <button
+            className='bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded'
+            onClick={reset}
+          >
+            Reset
+          </button>
         </div>
       </form>
       <div>
         <ul>
-          {responseMessage.map((message, index) => (
-            <li key={index}>{message.title}</li>
+          {dataLink.map((link, index) => (
+            <li key={index}>{link.title}</li>
           ))}
         </ul>
 
-        {responseMessage.length > 0 && (
-          <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
-            Send to Notion
-          </button>
-        )}
+        <div>
+          <form onSubmit={sendToNotion} className='flex flex-col items-center'>
+            <label>
+              PAGE ID
+              <input type='text' id='name' name='name' required />
+            </label>
+            <div className='flex mt-4 gap-2 justify-center items-center'>
+              <input type='radio' id='onlylinks' name='onlylinks' />
+              read
+              <input type='radio' id='onlylinks' name='onlylinks' />
+              tutorial
+              <input type='radio' id='onlylinks' name='onlylinks' />
+              videos
+              <input type='radio' id='onlylinks' name='onlylinks' />
+              showcase
+            </div>
+
+            <div className='flex mt-4 gap-2 justify-center items-center'>
+              <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
+                Send to Notion
+              </button>
+              <button
+                className='bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded'
+                onClick={sendToNotion}
+              >
+                Notion footer
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   )

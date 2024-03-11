@@ -49,7 +49,7 @@ export async function POST({ request }) {
 
   return new Response(
     JSON.stringify({
-      message: responses
+      links: responses
     })
   )
 }
@@ -96,41 +96,3 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
     summary: answer
   }
 }
-
-// const notion = new Client({ auth: NOTION_SECRET })
-
-// const responseNotion = await notion.blocks.children.append({
-//   block_id: NOTION_N_ID,
-//   children: [
-//     {
-//       object: 'block',
-//       type: 'paragraph',
-//       paragraph: {
-//         rich_text: [
-//           {
-//             type: 'text',
-//             text: {
-//               content: parse?.title ?? 'No title',
-//               link: {
-//                 url: url
-//               }
-//             }
-//           },
-//           {
-//             type: 'text',
-//             text: {
-//               content: '\n'
-//             }
-//           },
-//           {
-//             type: 'text',
-//             text: {
-//               content: answer ?? 'No summary'
-//             }
-//           }
-//         ]
-//       }
-//     }
-//   ]
-// })
-// console.log(responseNotion)
