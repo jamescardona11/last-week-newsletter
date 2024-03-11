@@ -18,10 +18,9 @@ export default function Form() {
     const data = await response.json()
 
     if (data.links) {
+      console.log('data.links')
       console.log(data.links)
-      for (const link of data.links) {
-        setDataLink([...dataLink, link as GPTResponse])
-      }
+      setDataLink([...dataLink, ...(data.links as GPTResponse[])])
     }
   }
 

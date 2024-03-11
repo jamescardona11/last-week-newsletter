@@ -38,7 +38,7 @@ export async function POST({ request }) {
   for (const url of urls) {
     if (!url) continue
 
-    if (url.includes('youtube')) {
+    if (url.includes('https://www.youtube.com')) {
       const response = await _youtubeLink(url)
       responses.push(response)
     } else {
@@ -46,6 +46,9 @@ export async function POST({ request }) {
       responses.push(response)
     }
   }
+
+  console.log('responses')
+  console.log(responses)
 
   return new Response(
     JSON.stringify({
@@ -76,7 +79,7 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
   const reader = new Readability(doc.window.document)
   const parse = reader.parse()
 
-  console.log(parse?.title)
+  var title = parse?.title
 
   var answer = ''
 
@@ -104,8 +107,18 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
     answer = response.choices[0].message.content ?? answer
   }
 
+  if (url.includes('https://github.com')) {
+    title = 'Github - ' + title!.split('/')[1]
+  }
+
+  if (title?.includes(' - Medium')) {
+    title = title.replaceAll(' - Medium', '')
+  }
+
+  console.log(title)
+
   return {
-    title: parse?.title,
+    title: title,
     url,
     summary: answer
   }
