@@ -3,9 +3,9 @@ import { type FormEvent, useState } from 'react'
 
 export default function Form() {
   const [dataLink, setDataLink] = useState<GPTResponse[]>([])
-  const [formData, setFormData] = useState({
-    textAreaValue: '' // State to control the value of the textarea
-  })
+  const [linkFormData, setLinkFormData] = useState('')
+  const [notionFormData, setNotionFormData] = useState('')
+  const [radioFormData, setRadioFormData] = useState('')
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault()
@@ -26,17 +26,40 @@ export default function Form() {
   }
 
   const handleTextAreaChange = event => {
-    setFormData({
-      ...formData,
-      textAreaValue: event.target.value // Update the value of the textarea in the state
-    })
+    setLinkFormData(event.target.value)
+  }
+
+  const handleNotionPageChange = event => {
+    setNotionFormData(event.target.value)
+  }
+
+  const handleRadioButtonChange = radioValue => {
+    setRadioFormData(radioValue)
   }
 
   async function sendToNotion() {
+    console.log('sendToNotion')
+
     const response = await fetch('/api/notion', {
       method: 'POST',
       body: JSON.stringify({
-        links: dataLink
+        links: dataLink,
+        radio: radioFormData,
+        pageId: notionFormData
+      })
+    })
+
+    const data = await response.json()
+    console.log(data)
+  }
+
+  async function notionFooter() {
+    console.log('notionFooter')
+
+    const response = await fetch('/api/notion', {
+      method: 'PATCH',
+      body: JSON.stringify({
+        pageId: notionFormData
       })
     })
 
@@ -46,9 +69,7 @@ export default function Form() {
 
   const reset = () => {
     setDataLink([])
-    setFormData({
-      textAreaValue: ''
-    })
+    setLinkFormData('')
   }
 
   return (
@@ -59,8 +80,8 @@ export default function Form() {
             id='url'
             name='url'
             className='flex h-20 w-full '
-            value={formData.textAreaValue} // Bind the value of the textarea to the state
-            onChange={handleTextAreaChange} // Handle changes in the textarea
+            value={linkFormData}
+            onChange={handleTextAreaChange}
           />
         </label>
 
@@ -86,29 +107,74 @@ export default function Form() {
         </ul>
 
         <div>
-          <form onSubmit={sendToNotion} className='flex flex-col items-center'>
+          <form className='flex flex-col items-center'>
             <label>
               PAGE ID
-              <input type='text' id='name' name='name' required />
+              <input
+                type='text'
+                id='name'
+                name='name'
+                value={notionFormData}
+                onChange={handleNotionPageChange}
+              />
             </label>
             <div className='flex mt-4 gap-2 justify-center items-center'>
-              <input type='radio' id='onlylinks' name='onlylinks' />
+              <input
+                type='radio'
+                id='read'
+                name='read'
+                value='read'
+                checked={radioFormData === 'read'}
+                onChange={() => {
+                  handleRadioButtonChange('read')
+                }}
+              />
               read
-              <input type='radio' id='onlylinks' name='onlylinks' />
+              <input
+                type='radio'
+                id='tutorial'
+                name='tutorial'
+                value='tutorial'
+                checked={radioFormData === 'tutorial'}
+                onChange={() => {
+                  handleRadioButtonChange('tutorial')
+                }}
+              />
               tutorial
-              <input type='radio' id='onlylinks' name='onlylinks' />
+              <input
+                type='radio'
+                id='videos'
+                name='videos'
+                value='videos'
+                checked={radioFormData === 'videos'}
+                onChange={() => {
+                  handleRadioButtonChange('videos')
+                }}
+              />
               videos
-              <input type='radio' id='onlylinks' name='onlylinks' />
+              <input
+                type='radio'
+                id='showcase'
+                name='showcase'
+                value='showcase'
+                checked={radioFormData === 'showcase'}
+                onChange={() => {
+                  handleRadioButtonChange('showcase')
+                }}
+              />
               showcase
             </div>
 
             <div className='flex mt-4 gap-2 justify-center items-center'>
-              <button className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'>
+              <button
+                className='bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded'
+                onClick={sendToNotion}
+              >
                 Send to Notion
               </button>
               <button
                 className='bg-pink-500 hover:bg-pink-700 text-white font-bold py-2 px-4 rounded'
-                onClick={sendToNotion}
+                onClick={notionFooter}
               >
                 Notion footer
               </button>

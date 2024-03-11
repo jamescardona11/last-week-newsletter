@@ -1,14 +1,9 @@
 import { Readability } from '@mozilla/readability'
 import { JSDOM } from 'jsdom'
-import { Client } from '@notionhq/client'
 
 export const prerender = true
 
-import {
-  NOTION_N_ID,
-  NOTION_SECRET,
-  OPENAI_API_KEY
-} from '@/lib/data/remote/remote-constants'
+import { OPENAI_API_KEY } from '@/lib/data/remote/remote-constants'
 
 import OpenAI from 'openai'
 
@@ -43,8 +38,13 @@ export async function POST({ request }) {
   for (const url of urls) {
     if (!url) continue
 
-    const response = await _chatgptSymmary(url, onlylinks)
-    responses.push(response)
+    if (url.includes('youtube')) {
+      const response = await _youtubeLink(url)
+      responses.push(response)
+    } else {
+      const response = await _chatgptSymmary(url, onlylinks)
+      responses.push(response)
+    }
   }
 
   return new Response(
@@ -52,6 +52,20 @@ export async function POST({ request }) {
       links: responses
     })
   )
+}
+
+async function _youtubeLink(url: string) {
+  const response = await fetch(
+    `https://noembed.com/embed?dataType=json&url=${url}`
+  ).then(res => res.json())
+
+  console.log(response)
+
+  return {
+    title: response.title,
+    url,
+    summary: ''
+  }
 }
 
 async function _chatgptSymmary(url: string, onlylinks: boolean) {
