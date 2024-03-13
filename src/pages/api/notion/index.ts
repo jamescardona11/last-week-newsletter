@@ -13,6 +13,7 @@ export async function GET() {
   )
 }
 
+// @ts-ignore
 export async function POST({ request }) {
   console.log('POST /api/notion')
 
@@ -147,11 +148,12 @@ export async function POST({ request }) {
   if (children.length !== 0) {
     const notion = new Client({ auth: NOTION_SECRET })
 
-    // @ts-ignore
-    const responseNotion = await notion.blocks.children.append({
+    const k = {
       block_id: blockId,
       children
-    })
+    }
+    // @ts-ignore
+    const responseNotion = await notion.blocks.children.append(k)
     console.log(responseNotion)
     return new Response(
       JSON.stringify({
@@ -167,6 +169,7 @@ export async function POST({ request }) {
   )
 }
 
+// @ts-ignore
 export async function PATCH({ request }) {
   console.log('PATCH /api/notion')
 
@@ -324,11 +327,13 @@ export async function PATCH({ request }) {
   if (children.length !== 0) {
     const notion = new Client({ auth: NOTION_SECRET })
 
-    // @ts-ignore
-    const responseNotion = await notion.blocks.children.append({
+    const k = {
       block_id: blockId,
       children
-    })
+    }
+
+    // @ts-ignore
+    const responseNotion = await notion.blocks.children.append(k)
     console.log(responseNotion)
     return new Response(
       JSON.stringify({

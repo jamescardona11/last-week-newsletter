@@ -1,4 +1,6 @@
 import { Readability } from '@mozilla/readability'
+
+// @ts-ignore
 import { JSDOM } from 'jsdom'
 
 export const prerender = true
@@ -16,6 +18,7 @@ export async function GET() {
   )
 }
 
+// @ts-ignore
 export async function POST({ request }) {
   console.log('POST /api/summary')
   const data = await request.formData()
