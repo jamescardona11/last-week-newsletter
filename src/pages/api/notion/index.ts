@@ -1,5 +1,7 @@
 import { Client } from '@notionhq/client'
 
+export const prerender = false
+
 import { NOTION_N_ID, NOTION_SECRET } from '@/lib/data/remote/remote-constants'
 
 export async function GET() {
