@@ -3,8 +3,6 @@ import { Readability } from '@mozilla/readability'
 // @ts-ignore
 import { JSDOM } from 'jsdom'
 
-export const prerender = false
-
 import { OPENAI_API_KEY } from '@/lib/data/remote/remote-constants'
 
 import OpenAI from 'openai'
