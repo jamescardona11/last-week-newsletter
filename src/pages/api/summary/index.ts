@@ -3,7 +3,7 @@ import { Readability } from '@mozilla/readability'
 // @ts-ignore
 import { JSDOM } from 'jsdom'
 
-export const prerender = true
+export const prerender = false
 
 import { OPENAI_API_KEY } from '@/lib/data/remote/remote-constants'
 
@@ -85,8 +85,9 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
   var title = parse?.title
 
   var answer = ''
+  const isGithub = url.includes('https://github.com')
 
-  if (!onlylinks) {
+  if (!onlylinks && !isGithub) {
     const openai = new OpenAI({
       apiKey: OPENAI_API_KEY
     })
@@ -110,7 +111,7 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
     answer = response.choices[0].message.content ?? answer
   }
 
-  if (url.includes('https://github.com')) {
+  if (isGithub) {
     title = 'Github - ' + title!.split('/')[1]
   }
 

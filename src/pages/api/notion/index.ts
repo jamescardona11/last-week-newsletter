@@ -1,6 +1,6 @@
 import { Client } from '@notionhq/client'
 
-export const prerender = true
+export const prerender = false
 
 import { NOTION_N_ID, NOTION_SECRET } from '@/lib/data/remote/remote-constants'
 
