@@ -55,15 +55,12 @@ export default function Form() {
   async function notionFooter() {
     console.log('notionFooter')
 
-    const response = await fetch('/api/notion', {
+    await fetch('/api/notion', {
       method: 'PATCH',
       body: JSON.stringify({
         pageId: notionFormData
       })
     })
-
-    const data = await response.json()
-    console.log(data)
   }
 
   const reset = () => {

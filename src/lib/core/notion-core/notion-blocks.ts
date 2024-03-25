@@ -12,7 +12,7 @@ export type StyleAnnotations = {
 }
 
 export type TextBlock = {
-  type: 'text'
+  type: 'text' | 'breakText'
   text: string
   styles?: string
   url?: string
@@ -132,6 +132,13 @@ const textFactory = (
     text: content,
     styles: opt.styles,
     url: opt.url
+  }
+}
+
+const breakTextFactory = (): TextBlock => {
+  return {
+    type: 'breakText',
+    text: ''
   }
 }
 
@@ -277,6 +284,7 @@ const unsupportedFactory = (): Unsupported => {
 }
 export const factory = {
   text: textFactory,
+  breakText: breakTextFactory,
   heading1: (text: string, hashLink: string) =>
     headingFactory(text, hashLink, 'h1'),
   heading2: (text: string, hashLink: string) =>

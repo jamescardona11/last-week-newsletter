@@ -315,7 +315,7 @@ const transformNotionMedia = (
 const transformNotionRichText = (
   richText: RichTextItemResponse[]
 ): TextBlock[] => {
-  return richText
+  const blocks = richText
     .map(t => {
       const styles = matchStyle(t.annotations as StyleAnnotations)
       const url =
@@ -323,7 +323,7 @@ const transformNotionRichText = (
 
       if (t.plain_text.startsWith('\n')) {
         return [
-          factory.text('\n', { styles, url }),
+          factory.breakText(),
           factory.text(t.plain_text.replace('\n', ''), { styles, url })
         ]
       }
@@ -331,6 +331,10 @@ const transformNotionRichText = (
       return [factory.text(t.plain_text, { styles, url })]
     })
     .flat()
+
+  // if (startWith) console.log(blocks)
+
+  return blocks
 }
 
 // TOOD: Partially unimplemented
