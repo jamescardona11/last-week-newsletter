@@ -45,7 +45,10 @@ export async function POST({ request }) {
       const response = await _youtubeLink(url)
       responses.push(response)
     } else {
-      const response = await _chatgptSymmary(url, onlylinks)
+      const response = await _chatgptSymmary(
+        url.replaceAll('(', '').replaceAll(')', ''),
+        onlylinks
+      )
       responses.push(response)
     }
   }
