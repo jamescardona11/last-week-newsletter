@@ -16,7 +16,12 @@ const { block: richText } = Astro.props
     ) : (
       <span class={b.styles}>
         {b.url != null ? (
-          <a class='text-gray-700 dark:text-zinc-400 underline' href={b.url}>
+          <a
+            class='text-gray-700 dark:text-zinc-400 underline'
+            href={b.url}
+            target='_blank'
+            rel='noopener noreferrer'
+          >
             {b.text}
           </a>
         ) : (

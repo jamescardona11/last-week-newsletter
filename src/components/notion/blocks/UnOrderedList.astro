@@ -25,7 +25,12 @@ const { block } = Astro.props
                   {i != 0 && <div class='ml-1' />}
                   <span class={b.styles}>
                     {b.url != null ? (
-                      <a class='underline' href={b.url}>
+                      <a
+                        class='underline'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                        href={b.url}
+                      >
                         {b.text}
                       </a>
                     ) : (
