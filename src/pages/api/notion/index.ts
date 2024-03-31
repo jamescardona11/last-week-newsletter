@@ -92,6 +92,23 @@ export async function POST({ request }) {
     }
 
     children.push(title)
+  } else if (body.radio === 'linkedin') {
+    const title = {
+      object: 'block',
+      type: 'heading_3',
+      heading_3: {
+        rich_text: [
+          {
+            type: 'text',
+            text: {
+              content: 'Linkedin Post 📪'
+            }
+          }
+        ]
+      }
+    }
+
+    children.push(title)
   }
 
   // children.push({

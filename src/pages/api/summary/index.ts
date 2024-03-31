@@ -89,8 +89,9 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
 
   var answer = ''
   const isGithub = url.includes('https://github.com')
+  const isLinkedin = url.includes('https://www.linkedin.com')
 
-  if (!onlylinks && !isGithub) {
+  if (!onlylinks && !isGithub && !isLinkedin) {
     const openai = new OpenAI({
       apiKey: OPENAI_API_KEY
     })
@@ -116,6 +117,10 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
 
   if (isGithub) {
     title = 'Github - ' + title!.split('/')[1]
+  }
+
+  if (isLinkedin) {
+    title = 'Linkedin - ' + title
   }
 
   if (title?.includes(' - Medium')) {

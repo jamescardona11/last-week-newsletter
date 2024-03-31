@@ -18,8 +18,6 @@ export default function Form() {
     const data = await response.json()
 
     if (data.links) {
-      console.log('data.links')
-      console.log(data.links)
       setDataLink([...dataLink, ...(data.links as GPTResponse[])])
     }
   }
@@ -159,6 +157,17 @@ export default function Form() {
                 }}
               />
               showcase
+              <input
+                type='radio'
+                id='linkedin'
+                name='linkedin'
+                value='linkedin'
+                checked={radioFormData === 'linkedin'}
+                onChange={() => {
+                  handleRadioButtonChange('linkedin')
+                }}
+              />
+              linkedin
             </div>
 
             <div className='flex mt-4 gap-2 justify-center items-center'>
