@@ -6,8 +6,8 @@ import PageLayout from '@/layouts/PageLayout.astro'
 
 import Pagination from '@/components/Pagination.astro'
 
-import PostsListView from '@/components/PostsListView.astro'
 import { getPostsData } from '@/lib/data/posts-provider'
+import PostPreview from '@/components/PostPreview.astro'
 
 // @ts-ignore
 export async function getStaticPaths({ paginate }) {
@@ -29,7 +29,15 @@ const { data: posts } = page
   {page.total == 0 && <p>No posts published.</p>}
 
   <!-- LIST VIEW -->
-  <PostsListView posts={posts} />
+  <ul class='space-y-4'>
+    {
+      posts.map(p => (
+        <li class='flex flex-col gap-x-2 sm:flex-row'>
+          <PostPreview post={p} />
+        </li>
+      ))
+    }
+  </ul>
 
   {(page.url.next || page.url.prev) && <Pagination page={page} />}
 </PageLayout>
