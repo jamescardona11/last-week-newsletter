@@ -7,6 +7,10 @@ const navItemsList: NavItemProps[] = [
     hideNavigation: true
   },
   {
+    href: '/search',
+    title: 'Search'
+  },
+  {
     href: '/posts',
     title: 'Posts'
   },
