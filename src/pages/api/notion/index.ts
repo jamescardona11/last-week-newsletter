@@ -101,7 +101,7 @@ export async function POST({ request }) {
           {
             type: 'text',
             text: {
-              content: 'Linkedin Post 📪'
+              content: 'LinkedIn Post 📪'
             }
           }
         ]
