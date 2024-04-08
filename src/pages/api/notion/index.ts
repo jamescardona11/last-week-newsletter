@@ -334,7 +334,7 @@ export async function PATCH({ request }) {
         {
           type: 'text',
           text: {
-            content: 'LinkedIn & Github: @jamescardona11'
+            content: 'LinkedIn & Github & Medium: @jamescardona11'
           }
         }
       ]
