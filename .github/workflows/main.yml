@@ -2,7 +2,7 @@ name: Weekly Commit
 
 on:
   schedule:
-    - cron: '0 20 * * 1' # Esto se ejecuta cada lunes a las 8 AM UTC
+    - cron: '0 18 * * 1' # Esto se ejecuta cada lunes a las 8 AM UTC
 
 jobs:
   build:
