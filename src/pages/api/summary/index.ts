@@ -85,11 +85,13 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
   const reader = new Readability(doc.window.document)
   const parse = reader.parse()
 
-  var title = parse?.title
+  let title = parse?.title
 
   var answer = ''
   const isGithub = url.includes('https://github.com')
   const isLinkedin = url.includes('https://www.linkedin.com')
+
+  console.log('onlylinks', onlylinks)
 
   if (!onlylinks && !isGithub && !isLinkedin) {
     const openai = new OpenAI({
@@ -127,11 +129,22 @@ async function _chatgptSymmary(url: string, onlylinks: boolean) {
     title = title.replaceAll(' - Medium', '')
   }
 
-  console.log(title)
+  if (!onlylinks) title = replaceLastColon(title ?? '', answer)
 
+  console.log(title)
+  console.log(answer)
   return {
     title: title,
     url,
     summary: answer
+  }
+}
+
+function replaceLastColon(str: string, str2: string) {
+  console.log(str)
+  if (str && str.length > 0 && str2 && str2.length > 0) {
+    return str + ':'
+  } else {
+    return str
   }
 }
