@@ -23,6 +23,7 @@
     "astro-pagefind": "^1.5.0",
     "github-slugger": "^2.0.0",
     "jsdom": "^24.0.0",
+    "notion-to-md": "^3.1.1",
     "openai": "^4.28.4",
     "pagefind": "^1.0.4",
     "react": "^18.2.0",

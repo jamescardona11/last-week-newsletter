@@ -1,11 +1,19 @@
 import { slug as slugger } from 'github-slugger'
+import { NotionToMarkdown } from 'notion-to-md'
+import fs from 'fs'
 
 import type {
   BlockObjectResponse,
   PartialBlockObjectResponse
 } from '@notionhq/client/build/src/api-endpoints'
 
-import { NOTION_BLOG_DB as NOTION_POST_DB } from '@/lib/data/remote/remote-constants'
+import {
+  NOTION_BLOG_DB as NOTION_POST_DB,
+  NOTION_SECRET
+} from '@/lib/data/remote/remote-constants'
+
+import { Client } from '@notionhq/client'
+
 import { notionClient } from '@/lib/core/notion-core/notion-client'
 import { type NBlogPostRow } from '@/lib/core/notion-core/notion-response-types'
 import { type Post } from '@/lib/types/post.type'
@@ -18,6 +26,7 @@ import {
 import { mapNotionBlocks } from '@/lib/core/notion-core/notion-map-blocks'
 
 const notionDatabaseId = NOTION_POST_DB
+const notionSecret = NOTION_SECRET
 
 /// Get all blog posts
 export async function getPostsFromNotion(limit?: number) {
@@ -64,6 +73,16 @@ export async function getPostsFromNotion(limit?: number) {
 /// Get a blog post by id
 export async function getPostBlocksById(pageId: string) {
   console.log(`GET /api/post/${pageId}`)
+
+  const n2m = new NotionToMarkdown({
+    notionClient: new Client({ auth: notionSecret })
+  })
+  const mdblocks = await n2m.pageToMarkdown(pageId)
+  const mdString = n2m.toMarkdownString(mdblocks)
+
+  console.log(mdString)
+
+  fs.mkdirSync('node_modules/.astro/.astrotion', { recursive: true })
 
   let content: Array<PartialBlockObjectResponse | BlockObjectResponse> = []
   let nextCursor
